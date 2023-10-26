@@ -1,6 +1,7 @@
 /* eslint-disable */
 import React, {useState} from 'react'
-
+import {NavLink } from 'react-router-dom'
+import {email_user_api,email_developer_api} from '../../Content/Api/email'
 const MainSidebar = () => {
   let [profile, setProfile] = useState(false)
   let [tabSelected, setTabSelected] = useState(1)
@@ -14,8 +15,6 @@ const MainSidebar = () => {
       item : 1
     },
   })
-
-  console.log(dropdown)
   return (
     <>
                   <div className="main-sidebar">
@@ -205,7 +204,7 @@ const MainSidebar = () => {
 
 
            {/* Sidebar Panel */}
-           <div className=" sidebar-panel" onClick={()=> setProfile(false)}>
+           <div className="sidebar-panel" onClick={()=> setProfile(false)}>
             {/* dashboard Sidebar */}
             <div className="flex h-full grow flex-col bg-white pl-[var(--main-sidebar-width)] dark:bg-navy-750" style={{display : tabSelected !== 1 && 'none' }}>
                 {/* Sidebar Panel Header */}
@@ -394,34 +393,22 @@ const MainSidebar = () => {
                     </svg>
                   </a>
                   <ul x-collapse x-show="expanded" style={{display: dropdown.email_user.state === true ? '' : 'none', height: dropdown.email_user.state === true ? 'auto' : '', overflow: dropdown.email_user.state === true ? '' : 'hidden'}}>
-                    <li>
-                      <a x-data="navLink" className={`flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 cursor-pointer  ${dropdown.email_user.item === 1 ? "font-medium text-primary dark:text-accent-light" : "text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50" }`} onClick={() => setDropdown(prevState => ({
-    ...prevState,
-    email_user: {
-        ...prevState.email_user,
-        item: 1
-    }
-}))}>
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Onboarding 1</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" className={`flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 cursor-pointer  ${dropdown.email_user.item === 2 ? "font-medium text-primary dark:text-accent-light" : "text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50" }`} onClick={() => setDropdown(prevState => ({
-    ...prevState,
-    email_user: {
-        ...prevState.email_user,
-        item: 2
-    }
-}))}>
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Onboarding 2</span>
-                        </div>
-                      </a>
-                    </li>
+                    {email_user_api?.map((email_item) => (
+                                          <li>
+                                          <NavLink to={`/admin/api/${email_item?.path}`} x-data="navLink" className={`flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 cursor-pointer  ${dropdown.email_user.item === email_item?.state ? "font-medium text-primary dark:text-accent-light" : "text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50" }`} onClick={() => setDropdown(prevState => ({
+                        ...prevState,
+                        email_user: {
+                            ...prevState.email_user,
+                            item: email_item?.state
+                        }
+                    }))}>
+                                            <div className="flex items-center space-x-2">
+                                              <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
+                                              <span>{email_item?.text}</span>
+                                            </div>
+                                          </NavLink>
+                                        </li>
+                    ))}
                   </ul>
                 </li>
                 <li x-data="accordionItem('menu-item-2')">
@@ -439,210 +426,22 @@ const MainSidebar = () => {
                     </svg>
                   </a>
                   <ul x-collapse x-show="expanded" style={{display: dropdown.email_developer.state === true ? '' : 'none', height: dropdown.email_developer.state === true ? 'auto' : '', overflow: dropdown.email_developer.state === true ? '' : 'hidden'}}>
-                    <li>
-                      <a x-data="navLink" className={`flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 cursor-pointer  ${dropdown.email_developer.item === 1 ? "font-medium text-primary dark:text-accent-light" : "text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50" }`} onClick={() => setDropdown(prevState => ({
-    ...prevState,
-    email_developer: {
-        ...prevState.email_developer,
-        item: 1
-    }
-}))}>
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>User Card 1</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" className={`flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 cursor-pointer  ${dropdown.email_developer.item === 2 ? "font-medium text-primary dark:text-accent-light" : "text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50" }`} onClick={() => setDropdown(prevState => ({
-    ...prevState,
-    email_developer: {
-        ...prevState.email_developer,
-        item: 2
-    }
-}))}>
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>User Card 2</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li x-data="accordionItem('menu-item-3')">
-                  <a className="flex items-center justify-between py-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out text-slate-600 dark:text-navy-200 hover:text-slate-800 dark:hover:text-navy-50" href="javascript:void(0);">
-                    <span>Blog Card</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 transition-transform ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                  <ul x-collapse x-show="expanded" style={{display: 'none', height: 0, overflow: 'hidden'}} hidden>
-                    <li>
-                      <a x-data="navLink" href="pages-card-blog-1.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Blog Card 1</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-card-blog-2.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Blog Card 2</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-card-blog-3.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Blog Card 3</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-card-blog-4.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Blog Card 4</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-card-blog-5.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Blog Card 5</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-card-blog-6.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Blog Card 6</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-card-blog-7.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Blog Card 7</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-card-blog-8.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Blog Card 8</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-blog-details.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Blog Detail</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li x-data="accordionItem('menu-item-4')">
-                  <a className="flex items-center justify-between py-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out text-slate-600 dark:text-navy-200 hover:text-slate-800 dark:hover:text-navy-50" href="javascript:void(0);">
-                    <span>Help</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 transition-transform ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                  <ul x-collapse x-show="expanded" style={{display: 'none', height: 0, overflow: 'hidden'}} hidden>
-                    <li>
-                      <a x-data="navLink" href="pages-help-1.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Help 1</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-help-2.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Help 2</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-help-3.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Help 3</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li x-data="accordionItem('menu-item-5')">
-                  <a className="flex items-center justify-between py-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out text-slate-600 dark:text-navy-200 hover:text-slate-800 dark:hover:text-navy-50" href="javascript:void(0);">
-                    <span>Price List</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 transition-transform ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                  <ul x-collapse x-show="expanded" style={{display: 'none', height: 0, overflow: 'hidden'}} hidden>
-                    <li>
-                      <a x-data="navLink" href="pages-price-list-1.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Price List 1</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-price-list-2.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Price List 2</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-price-list-3.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Price List 3</span>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <li x-data="accordionItem('menu-item-6')">
-                  <a className="flex items-center justify-between py-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out text-slate-600 dark:text-navy-200 hover:text-slate-800 dark:hover:text-navy-50" href="javascript:void(0);">
-                    <span>Invoice</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-400 transition-transform ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                    </svg>
-                  </a>
-                  <ul x-collapse x-show="expanded" style={{display: 'none', height: 0, overflow: 'hidden'}} hidden>
-                    <li>
-                      <a x-data="navLink" href="pages-invoice-1.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Invoice 1</span>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <a x-data="navLink" href="pages-invoice-2.html" className="flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50">
-                        <div className="flex items-center space-x-2">
-                          <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
-                          <span>Invoice 2</span>
-                        </div>
-                      </a>
-                    </li>
+                  {email_developer_api?.map((email_item) => (
+                                          <li>
+                                          <a x-data="navLink" className={`flex items-center justify-between p-2 text-xs+ tracking-wide outline-none transition-[color,padding-left] duration-300 ease-in-out hover:pl-4 cursor-pointer  ${dropdown.email_developer.item === email_item?.state ? "font-medium text-primary dark:text-accent-light" : "text-slate-600 hover:text-slate-900 dark:text-navy-200 dark:hover:text-navy-50" }`} onClick={() => setDropdown(prevState => ({
+                        ...prevState,
+                        email_developer: {
+                            ...prevState.email_developer,
+                            item: email_item?.state
+                        }
+                    }))}>
+                                            <div className="flex items-center space-x-2">
+                                              <div className="h-1.5 w-1.5 rounded-full border border-current opacity-40" />
+                                              <span>{email_item?.text}</span>
+                                            </div>
+                                          </a>
+                                        </li>
+                    ))}
                   </ul>
                 </li>
               </ul>
