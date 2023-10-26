@@ -1,0 +1,17 @@
+algebra 1
+probability 8765
+geometry 12625
+intermediate_algebra 14334
+number_theory 20818
+prealgebra 25195
+precalculus 31242
+
+
+test
+algebra 1
+probability 5971
+geometry 8345
+intermediate_algebra 10747
+number_theory 15269
+prealgebra 17989
+precalculus 22365

@@ -1,0 +1,10 @@
+.text-align-left {
+  text-align : left
+}
+
+.show {
+  visibility: visible !important;
+}
+.cursor-poniter {
+  cursor : pointer;
+}

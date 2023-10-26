@@ -1,0 +1,31 @@
+:root {
+    --danger-color: #ff5733; /* Updated color value */
+  }
+  
+.text-danger {
+color: var(--danger-color) !important;
+}
+
+.fw-500 {
+    font-weight: 500 !important;
+}
+.fw-600 {
+    font-weight: 600 !important;
+}
+.fw-650 {
+    font-weight: 650 !important;
+}
+.text-align-left {
+  text-align: left!important;
+}
+
+.cursor-pointer {
+cursor : pointer !important;
+}
+.cursor-default {
+cursor : default !important;
+}
+.is-monochrome-filter {
+filter: grayscale(100%) !important;
+opacity: 0.92 !important;
+}
