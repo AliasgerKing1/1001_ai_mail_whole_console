@@ -19,5 +19,5 @@ let updateApiReceived_emailsData = async (id, data) => {
 return await axios.put(`${apiUrl}${id}`, data);
 }
 
-export {daleteApiReceived_emailsData, getApiReceived_emailsData, getApiReceived_emailsDataByToken, AddApiReceived_emailsData, updateApiReceived_emailsData}
+export {daleteApiReceived_emailsData, getApiReceived_emailsData, getApiReceived_emailsDataById, AddApiReceived_emailsData, updateApiReceived_emailsData}
                 

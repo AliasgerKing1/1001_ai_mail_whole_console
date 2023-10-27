@@ -8,7 +8,7 @@ import {email_user_api} from '../Content/Api/email'
 const components = Object.fromEntries(
     email_user_api.map(({ ComponentName }) => [
       ComponentName,
-      React.lazy(() => import(`../Components/Pages/${ComponentName}/${ComponentName}`)),
+      React.lazy(() => import(`../Components/Pages/Admin/Email-Api/${ComponentName}/${ComponentName}`)),
     ])
   );
 

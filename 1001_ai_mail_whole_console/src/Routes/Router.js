@@ -1,3 +1,4 @@
+    /* eslint-disable */
 import React, {useEffect} from 'react'
 import {useRoutes, Navigate} from 'react-router-dom'
 import authRoutes from './authRoutes'
@@ -12,7 +13,7 @@ import SigninUser from '../Components/Pages/User/Signin/Signin'
 const Router = () => {
     let createComponentFun = async () => {
         await axios.post("http://127.0.0.1:5000/create/component", email_user_api)
-        await axios.post("http://127.0.0.1:5000/create/component", email_developer_api)
+        // await axios.post("http://127.0.0.1:5000/create/component", email_developer_api)
     }
     useEffect(() => {
         createComponentFun()
