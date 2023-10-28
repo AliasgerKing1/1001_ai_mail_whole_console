@@ -16,7 +16,7 @@ const Router = () => {
         // await axios.post("http://127.0.0.1:5000/create/component", email_developer_api)
     }
     useEffect(() => {
-        createComponentFun()
+        // createComponentFun()
     }, [])
     let isTokenPresent = () => {
         const token = localStorage.getItem('1001_ai_console_token');

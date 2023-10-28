@@ -10,10 +10,12 @@ import {Provider} from'react-redux'
 import {configureStore, combineReducers} from '@reduxjs/toolkit'
 import adminReducer from './Redux/AdminReducer'
 import userReducer from './Redux/UserReducer'
+import editModeReducer from './Redux/EditModeReducer'
 
 let rootReducer = combineReducers({
     adminReducer,
-    userReducer
+    userReducer,
+    editModeReducer,
   })
   
   let store = configureStore({

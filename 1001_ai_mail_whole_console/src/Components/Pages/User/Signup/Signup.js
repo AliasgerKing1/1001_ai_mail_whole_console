@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import { NavLink,useNavigate } from 'react-router-dom';
+import {useSelector} from 'react-redux'
 import {useFormik} from 'formik' 
 import axios from 'axios';
 import SignupSchema from '../../../../Schemas/SignupSchema'
@@ -14,11 +15,22 @@ function formatDate(timestamp) {
 let date = new Date()
 const formattedDate = formatDate(date);
 const signin = () => {
+  let state = useSelector(state=>state.editModeReducer)
   let navigate = useNavigate();
   let [msg, setMsg] = useState("")
   let [eye, setEye] = useState(false)
   let [showLoader, setShowLoader] = useState(false);
   let [error, setError] = useState(false);
+  let [details, setDetails] = useState({
+    mainHeading : {
+      editMainText : false,
+      text : 'Welcome To Lineone'
+    },
+    subHeading : {
+      editSubText : false,
+      text : 'Please sign up to continue'
+    },
+  });
     const [ admin, setAdmin ] = useState([]);
     const [ profile, setProfile ] = useState([]);
 
@@ -53,12 +65,12 @@ const signin = () => {
     join_date : formattedDate
   }
 
-
 let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormik({
   initialValues : initialValues,
-  validationSchema : SignupSchema,
+  validationSchema : state.condition === false ? SignupSchema : null,
   onSubmit : async () => {
-    setError(true)
+    if (state.condition === false) {
+      setError(true)
     let result = await signup(values)
     if(result.data.status == 500) {
       setError(true)
@@ -77,11 +89,22 @@ let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormi
       navigate('/auth/skmail')
     }
     setError(false)
+    }
   }
 })
   return (
     <>
-  <div x-data className="is-header-blur" x-bind="$store.global.documentBody">
+  <div x-data className="is-header-blur" x-bind="$store.global.documentBody" onClick={() => setDetails(prevState => ({
+    ...prevState,
+    mainHeading: {
+        ...prevState.mainHeading,
+        editMainText: false
+    },
+    subHeading: {
+        ...prevState.subHeading,
+        editSubText: false
+    },
+}))}>
   {/* App preloader*/}
   {/* <div className="app-preloader fixed z-50 grid h-full w-full place-content-center bg-slate-50 dark:bg-navy-900">
     <div className="app-preloader-inner relative inline-block h-48 w-48" />
@@ -93,12 +116,47 @@ let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormi
         <div className="text-center">
           <img className="mx-auto h-16 w-16" src="/assets/images/app-logo.svg" alt="logo" />
           <div className="mt-4">
-            <h2 className="text-2xl font-semibold text-slate-600 dark:text-navy-100">
-              Welcome To Lineone
-            </h2>
-            <p className="text-slate-400 dark:text-navy-300">
-              Please sign up to continue
-            </p>
+              {
+              state.condition === true ? (details.mainHeading.editMainText === false ? (<h2 className="text-2xl font-semibold text-slate-600 dark:text-navy-100" onClick={(event) => {
+                event.stopPropagation();
+                setDetails(prevState => ({
+                    ...prevState,
+                    mainHeading: {
+                        ...prevState.mainHeading,
+                        editMainText: true
+                    }
+                }));
+              }}
+              >{details.mainHeading.text}</h2>) : (<input class="form-input peer w-9/12 rounded-lg border bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent border-slate-300" type="text" name="username" defaultValue={details.mainHeading.text} onChange={(e) => {
+                setDetails(prevState => ({
+                    ...prevState,
+                    mainHeading: {
+                        ...prevState.mainHeading,
+                        text: e.target.value
+                    }
+                }));
+              }} />)) : (<h2 className="text-2xl font-semibold text-slate-600 dark:text-navy-100">{details.mainHeading.text}</h2>)}
+
+              {
+              state.condition === true ? (details.subHeading.editSubText === false ? (<p onClick={(event) => {
+                event.stopPropagation();
+                setDetails(prevState => ({
+                    ...prevState,
+                    subHeading: {
+                        ...prevState.subHeading,
+                        editSubText: true
+                    }
+                }));
+              }}
+              className="text-slate-400 dark:text-navy-300">{details.subHeading.text}</p>) : (<input class="form-input peer w-8/12 rounded-lg border bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent border-slate-300" type="text" name="username" defaultValue={details.subHeading.text} onChange={(e) => {
+                setDetails(prevState => ({
+                    ...prevState,
+                    subHeading: {
+                        ...prevState.subHeading,
+                        text: e.target.value
+                    }
+                }));
+              }} />)) : (<p className="text-slate-400 dark:text-navy-300">{details.subHeading.text}</p>)}
           </div>
         </div>
         <form onSubmit={handleSubmit}>

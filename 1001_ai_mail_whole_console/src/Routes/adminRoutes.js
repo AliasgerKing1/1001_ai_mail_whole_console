@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import Home from '../Components/Pages/Admin/Home/Home'
 import EmailApi from '../Components/Pages/Admin/Api/EmailApi'
-
+import EditSignupPage from '../Components/Pages/Admin/EditPages/EditSignupPage'
 import {email_user_api} from '../Content/Api/email'
 
 // Create an object where the keys are component names and the values are lazy-loaded components
@@ -20,6 +20,10 @@ const adminRoutes = [
     {
         path : "api/email",
         element : <EmailApi />
+    },
+    {
+        path : "edit/signup",
+        element : <EditSignupPage />
     },
     {
         path: 'api',
