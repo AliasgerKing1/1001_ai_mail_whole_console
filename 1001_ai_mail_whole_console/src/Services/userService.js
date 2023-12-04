@@ -14,5 +14,4 @@ let signup = async (data) => {
 let getUserData = async (token) => {
     return await axios.get(`${apiUrl}`, {headers : {token}});
 }
-
 export {loginGoogle, login, getUserData, signup}

@@ -1,7 +1,8 @@
 import * as Yup from "yup"
 
+let msg = "Feild required!"
 const SigninSchema = Yup.object({
-    username : Yup.string().required("Username required!"),
-    password : Yup.string().required("Password required!")
+    email : Yup.string().required(msg),
+    password : Yup.string().required(msg)
 })
 export default SigninSchema

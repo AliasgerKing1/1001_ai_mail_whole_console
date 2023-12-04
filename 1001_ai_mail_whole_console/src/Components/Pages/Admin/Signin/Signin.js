@@ -41,7 +41,7 @@ const signin = () => {
   //     [ admin ]
   // );
   let initialValues = {
-    username: "",
+    email: "",
     password: "",
   }
 
@@ -130,7 +130,7 @@ let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormi
         </div>
         <div className="mt-16">
           <label className="relative flex">
-            <input placeholder="Username" type="text" name='username' className={`form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900 ${touched.username && errors.username ? "is-invalid" : ""}`} onChange={handleChange} onBlur={handleBlur} value={values.username}/>
+            <input placeholder="Username" type="text" name='email' className={`form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900 ${touched.email && errors.email ? "is-invalid" : ""}`} onChange={handleChange} onBlur={handleBlur} value={values.email}/>
             <span className="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -138,7 +138,7 @@ let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormi
             </span>
           </label>
           <div className="flex items-center justify-between space-x-2">
-            <div>{touched.username && errors.username ? (<small className='text-danger fw-500'>{errors.username}</small>) : null}</div>
+            <div>{touched.email && errors.email ? (<small className='text-danger fw-500'>{errors.email}</small>) : null}</div>
           </div>
           <label className="relative mt-4 flex">
             <input placeholder="Password" type="password" name='password' className={`form-input peer w-full rounded-lg bg-slate-150 px-3 py-2 pl-9 ring-primary/50 placeholder:text-slate-400 hover:bg-slate-200 focus:ring dark:bg-navy-900/90 dark:ring-accent/50 dark:placeholder:text-navy-300 dark:hover:bg-navy-900 dark:focus:bg-navy-900 ${touched.password && errors.password ? "is-invalid" : ""}`} onChange={handleChange} onBlur={handleBlur} value={values.password}/>
@@ -158,7 +158,7 @@ let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormi
             </label>
             <a href="#" className="text-xs text-slate-400 transition-colors line-clamp-1 hover:text-slate-800 focus:text-slate-800 dark:text-navy-300 dark:hover:text-navy-100 dark:focus:text-navy-100">Forgot Password?</a>
           </div>
-          <button className="btn mt-10 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
+          <button type='submit' className="btn mt-10 h-10 w-full bg-primary font-medium text-white hover:bg-primary-focus focus:bg-primary-focus active:bg-primary-focus/90 dark:bg-accent dark:hover:bg-accent-focus dark:focus:bg-accent-focus dark:active:bg-accent/90">
             Sign In
           </button>
           <div className="my-7 flex items-center space-x-3">

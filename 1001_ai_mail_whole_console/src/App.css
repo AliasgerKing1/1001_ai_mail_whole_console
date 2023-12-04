@@ -8,3 +8,29 @@
 .cursor-poniter {
   cursor : pointer;
 }
+
+
+.truncate-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 400px;
+}
+.truncate-text-email-message {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px;
+}
+
+@media only screen and (max-width: 600px) {
+  .popper-root {
+    transform: translate(-200px, 58px);
+  }
+}
+@media only screen and (min-width: 601px) {
+  .popper-root {
+    transform: translate(-450px, 58px);
+  }
+}
+

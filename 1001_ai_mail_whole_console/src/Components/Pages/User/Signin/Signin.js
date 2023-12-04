@@ -41,7 +41,7 @@ const signin = () => {
   //     [ admin ]
   // );
   let initialValues = {
-    username: "",
+    email: "",
     password: "",
   }
 
@@ -63,7 +63,7 @@ let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormi
         if(result.data.errType == 1) {
           setShowLoader(false)
           setShowAlert(true)
-          setMsg("Username or Password is incorrect")
+          setMsg("Email or Password is incorrect")
           setTimeout(() => {
             setShowAlert(false)
           }, 3000);
@@ -71,7 +71,7 @@ let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormi
         if(result.data.errType == 2) {
           setShowLoader(false)
           setShowAlert(true)
-          setMsg("Username or Password is incorrect")
+          setMsg("Email or Password is incorrect")
           setTimeout(() => {
             setShowAlert(false)
           }, 3000);
@@ -116,9 +116,9 @@ let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormi
         <form onSubmit={handleSubmit}>
         <div className="card mt-5 rounded-lg p-5 lg:p-7">
           <label className="block">
-            <span>Username:</span>
+            <span>email:</span>
             <span className="relative mt-1.5 flex">
-              <input className={`form-input peer w-full rounded-lg border bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent ${errors.username && touched.username ? "border-error" : "border-slate-300"}`} placeholder="Username" type="text" name="username" onChange={handleChange} onBlur={handleBlur} value={values.username} />
+              <input className={`form-input peer w-full rounded-lg border bg-transparent px-3 py-2 pl-9 placeholder:text-slate-400/70 hover:z-10 hover:border-slate-400 focus:z-10 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent ${errors.email && touched.email ? "border-error" : "border-slate-300"}`} placeholder="Email" type="text" name="email" onChange={handleChange} onBlur={handleBlur} value={values.email} />
               <span className="pointer-events-none absolute flex h-full w-10 items-center justify-center text-slate-400 peer-focus:text-primary dark:text-navy-300 dark:peer-focus:text-accent">
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -126,7 +126,7 @@ let {values, handleBlur, handleChange, handleSubmit, errors, touched} = useFormi
               </span>
             </span>
           </label>
-          <div classname='text-align-left'>{errors.username && touched.username ? (<small className='text-danger'>{errors.username}</small>) : null}</div>
+          <div classname='text-align-left'>{errors.email && touched.email ? (<small className='text-danger'>{errors.email}</small>) : null}</div>
           <label className="mt-4 block">
             <span>Password:</span>
             <span className="relative mt-1.5 flex">

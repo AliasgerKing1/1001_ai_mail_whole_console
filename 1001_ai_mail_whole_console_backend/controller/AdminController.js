@@ -4,14 +4,15 @@ const Admin = require("../models/Admin");
 const jwt = require("jsonwebtoken")
 
 routes.post("/loginauth",  async(req,res) => {
-    let username = req.body.username;
+    let email = req.body.email;
     let password = sha1(req.body.password);
-    let result = await Admin.find({username : username});
+    let result = await Admin.find({email : email});
+    console.log(result.length)
     if(result.length > 0) {
         if(result[0]?.password == password) {
             let obj = {
                 _id : result[0]._id,
-                username : result[0].username
+                email : result[0].email
             }
             let token = jwt.sign(obj, "Aliasger web")
             // let lock_token = str()

@@ -1,8 +1,14 @@
 /* eslint-disable */
-import React from 'react'
+import React, { useEffect } from 'react'
 import MainSidebar from '../../../Shared/MainSidebar'
 import Header from '../../../Shared/Header'
 const Home = () => {
+  // useEffect(()=> {
+  // let storage = localStorage.getItem("skmail_tokens");
+  // if(!storage) {
+  //   localStorage.setItem("skmail_tokens", [])
+  // }
+  // }, [])
   return (
     <>
       <div>

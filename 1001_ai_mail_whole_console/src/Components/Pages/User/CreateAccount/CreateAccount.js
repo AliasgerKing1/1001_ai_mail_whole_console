@@ -4,12 +4,24 @@ import MainSidebar from '../../../Shared/MainSidebar'
 import Header from '../../../Shared/Header'
 import { accountType } from '../../../../Content/CreateAccountTypeDropdown';
 const CreateAccount = () => {
-  let [currentStep, setCurrentStep] = useState(3);
+  let [currentStep, setCurrentStep] = useState(2);
   let [step3DropdownOpen, setStep3DropdownOpen] = useState(false);
+  function formatDate(timestamp) {
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(timestamp).toLocaleDateString('en-IN', options);
+  }
+  let date = new Date()
+  const formattedDate = formatDate(date);
   let [data, setData] = useState({
     step1 : '',
     step2 : {
-
+      fname : '',
+      lname : '',
+      dob : '',
+      contact : '',
+      join_date : formattedDate,
+      password : '',
+      conf_password : ''
     },
     step3 : 'Personal',
   })
@@ -17,6 +29,8 @@ const CreateAccount = () => {
   let nextTab = () => {
     if(currentStep <= 2) {
       setCurrentStep(currentStep + 1)
+    } else {
+      
     }
   }
   let prevTab = () => {
@@ -1264,7 +1278,8 @@ const CreateAccount = () => {
 
                   <label className="block text-align-left">
                     <span>Email</span>
-                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="example@skmail.com" type="email" />
+                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="example@skmail.com" type="email" onChange={(e) => setData({...data, step1 : e.target.value })}
+ />
                   </label>
                   {/* </div> */}
                 </div>
@@ -1288,7 +1303,7 @@ const CreateAccount = () => {
             </>)}
             {currentStep == 2 && (<>
               <div className="col-span-12 grid lg:col-span-8">
-              <div className="card" style={{height : '330px'}}>
+              <div className="card" style={{height : '400px'}}>
                 <div className="border-b border-slate-200 p-4 dark:border-navy-500 sm:px-5">
                   <div className="flex items-center space-x-2">
                     <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary/10 p-1 text-primary dark:bg-accent-light/10 dark:text-accent-light">
@@ -1303,11 +1318,13 @@ const CreateAccount = () => {
                   <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
                   <label className="block text-align-left">
                     <span>Name</span>
-                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="John" type="text" />
+                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="John" type="text" onChange={(e) => setData({...data, step2 : {...data.step2, fname : e.target.value }})}
+ />
                   </label>
                   <label className="block text-align-left">
                     <span>Surname</span>
-                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Doe" type="text" />
+                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="Doe" type="text" onChange={(e) => setData({...data, step2 : {...data.step2, lname : e.target.value }})}
+ />
                   </label>
                   </div>
                   <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
@@ -1321,7 +1338,18 @@ const CreateAccount = () => {
               </label>
               <label className="block text-align-left">
                     <span>Contact</span>
-                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="+91 6543055655" type="text" />
+                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="+91 6543055655" type="text" onChange={(e) => setData({...data, step2 : {...data.step2, contact : e.target.value }})}
+ />
+                  </label>
+              <label className="block text-align-left">
+                    <span>Password</span>
+                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="+91 6543055655" type="text" onChange={(e) => setData({...data, step2 : {...data.step2, password : e.target.value }})}
+ />
+                  </label>
+              <label className="block text-align-left">
+                    <span>Confirm Password</span>
+                    <input className="form-input mt-1.5 w-full rounded-lg border border-slate-300 bg-transparent px-3 py-2 placeholder:text-slate-400/70 hover:border-slate-400 focus:border-primary dark:border-navy-450 dark:hover:border-navy-400 dark:focus:border-accent" placeholder="+91 6543055655" type="text" onChange={(e) => setData({...data, step2 : {...data.step2, conf_password : e.target.value }})}
+ />
                   </label>
               </div>
                 </div>

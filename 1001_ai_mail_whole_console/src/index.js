@@ -11,11 +11,13 @@ import {configureStore, combineReducers} from '@reduxjs/toolkit'
 import adminReducer from './Redux/AdminReducer'
 import userReducer from './Redux/UserReducer'
 import editModeReducer from './Redux/EditModeReducer'
+import userSidebarTabReducer from './Redux/UserSidebarTabReducer'
 
 let rootReducer = combineReducers({
     adminReducer,
     userReducer,
     editModeReducer,
+    userSidebarTabReducer,
   })
   
   let store = configureStore({
